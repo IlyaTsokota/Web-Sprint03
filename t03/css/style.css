@@ -1,0 +1,160 @@
+/*Обнуление*/
+* {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+*,
+*:before,
+*:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+:focus,
+:active {
+	outline: none;
+}
+
+a:focus,
+a:active {
+	outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+	display: block;
+}
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+	font-size: 14px;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	color: #2f3035;
+}
+
+input,
+button,
+textarea {
+	font-family: inherit;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+button {
+	cursor: pointer;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+a,
+a:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+ul li {
+	list-style: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+	color: inherit;
+}
+
+i {
+	font-family: fontawesome !important;
+}
+
+/*--------------------*/
+body {
+	background-color: #41b3A3;
+}
+
+.body * {
+	font-family: Arial, sans-serif;
+	color: #FFF;
+}
+
+.container {
+	max-width: 1170px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+.body__inner {
+	padding: 40px 0;
+}
+
+.title {
+	font-weight: bold;
+	text-align: center;
+	font-size: 45px;
+}
+
+.body__img {
+	margin: 0 auto;
+	width: 500px;
+	height: 400px;
+	background: url('../assets/images/human.jpg') center center no-repeat;
+	background-size: cover;
+}
+
+.body__img.body__img--hero {
+	background-image: url('../assets/images/supehero.jpg') !important;
+	width: 100%;
+	height: 250px;
+}
+
+.body__btns {
+	display: flex;
+	justify-content: center;
+}
+
+.body__btn {
+	margin: 25px 15px;
+	padding: 10px 25px;
+	background-color: #e27d60;
+	text-transform: uppercase;
+}
+
+.hide {
+	display: none;
+}
+
+.body__btn-tohero {
+	display: block;
+	margin: 0 auto;
+	padding: 10px 25px;
+	text-transform: uppercase;
+	background-color: #c38d9e;
+}

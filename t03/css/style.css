@@ -158,3 +158,41 @@ body {
 	text-transform: uppercase;
 	background-color: #c38d9e;
 }
+.card{
+	position: absolute;
+	right: 25px;
+	top: 25px;
+}
+
+.card__items{
+	display: flex;
+	flex-direction: column;
+}
+
+.card__item{
+	margin: 15px 0;
+	display: flex;
+	padding: 15px;
+	background-color: #e27d60;
+	border-radius: 25px;
+}
+
+.card__item-msg{
+	font-size: 20px;
+	color: #fff;
+	margin-right: 15px;
+	padding: 5px;
+	
+}
+
+.card__item-timer{
+	padding: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+	color: #fff;
+	background-color: #000;
+}
+
+.block{
+	pointer-events: none;
+}

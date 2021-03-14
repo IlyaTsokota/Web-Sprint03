@@ -7,11 +7,11 @@ class Human {
 		this.gender = gender;
 		this.age = age;
 		this.calories = calories;
-		this.firtTimer = setTimeout(() => alert("You are hungry!"), 5000);
+		this.firtTimer = setTimeout(() => addCardItem("You are hungry!", 4, 'hungry', false), 5000);
 		this.timer = setInterval(() => {
 			this.calories -= 200;
 			if (this.calories < 200) {
-				alert("You are hungry!");
+				addCardItem("You are hungry!", 4, 'hungry2', false);
 			}
 			if (this.calories < 0) {
 				this.calories = 0;
@@ -21,34 +21,33 @@ class Human {
 
 	sleepFor(seconds) {
 		let i = seconds;
-		alert(`I'm sleeping for the ${seconds} of seconds`);
+		addCardItem(`I'm sleeping for the ${seconds} of seconds`, seconds, 'sleep');
+		
 		const timer = setInterval(() => {
 			if (i <= 0) {
-				alert("I'm awake now");
+				addCardItem("I'm awake now", 4, 'awake', false);
 				clearInterval(timer);
 			} else {
 				i--;
-				console.log(`I'm sleeping for the ${i} of seconds`);
 			}
 		}, 1000);
 	}
 
 	feed() {
 		if (this.calories > 500) {
-			alert("I'm not hungry");
+			addCardItem("I'm not hungry", 4, 'feed', false);
 		} else {
 			let i = 0;
-			alert("Nom nom nom");
+			addCardItem("Nom nom nom", 10, 'feed');
 			const timer = setInterval(() => {
 				if (i >= 10) {
 					this.calories += 200;
 					if (this.calories > 500) {
-						alert("I'm still hungry");
+						addCardItem("I'm still hungry", 4, 'feedAnswer', false);
 					}
 					clearInterval(timer);
 				} else {
 					i++;
-					console.log("Nom nom nom");
 				}
 			}, 1000);
 		}
@@ -62,21 +61,21 @@ class Superhero extends Human {
 
 	fly() {
 		let i = 0;
-		alert("I'm flying!");
+		addCardItem("I'm flying!", 10, 'fly', false)
 		const timer = setInterval(() => {
 			if (i >= 10) {
 				clearInterval(timer);
 			} else {
 				i++;
-				console.log("I'm flying!");
 			}
 		}, 1000);
 	}
 
 	fightWithEvil() {
-		alert('Khhhh-chh... Bang-g-g-g... Evil is defeated!');
+		addCardItem('Khhhh-chh... Bang-g-g-g... Evil is defeated!', 5, 'fightWithEvil', false)
 	}
 }
+
 
 let human = new Human("Ilya", "Tsokota", "male", 20, 400);
 
@@ -84,8 +83,42 @@ let human = new Human("Ilya", "Tsokota", "male", 20, 400);
 const title = document.querySelector('.title'),
 	img = document.querySelector('.body__img'),
 	bodyBtns = document.querySelectorAll('.body__btn'),
-	toHeroBtn = document.querySelector('.body__btn-tohero');
+	toHeroBtn = document.querySelector('.body__btn-tohero'),
+	cardItems = document.querySelector('.card__items');
 
+function addCardItem(msg, time, classTimer = '', isBlock = true){
+	if(isBlock){
+		blockBtns();
+	}
+	const code = `
+		<div class="card__item">
+				<div class="card__item-msg">${msg}</div>
+				<div class="card__item-timer ${classTimer}">${time}</div>
+		</div>
+	`;
+	cardItems.insertAdjacentHTML('afterbegin', code);
+	let i = 0;
+	const timerItem = document.querySelector(`.${classTimer}`),
+	parent = timerItem.parentElement,
+	timer = setInterval(()=>{
+		if(+timerItem.textContent <= 1){
+			unblockBtns();
+			parent.remove();
+			clearInterval(timer);
+		}
+		timerItem.textContent = time - i++;
+	}, 1000);
+}
+
+function blockBtns(){
+	toHeroBtn.classList.add('block');
+	bodyBtns.forEach(item=> item.classList.add('block'));
+}
+
+function unblockBtns(){
+	toHeroBtn.classList.remove('block');
+	bodyBtns.forEach(item=> item.classList.remove('block'));
+}
 
 toHeroBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -96,7 +129,7 @@ toHeroBtn.addEventListener("click", (e) => {
 		img.classList.add('body__img--hero');
 		title.textContent = "You are Superhero!";
 	} else {
-		alert("Low in calories");
+		addCardItem("Low in calories", 5, 'tohero', false)
 	}
 });
 

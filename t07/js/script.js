@@ -9,7 +9,8 @@ class Node {
 
 class LinkedList {
     constructor() {
-        this.head = null;
+        this.data = null;
+        this.next = null;
         this.length = 0;
     }
 
@@ -17,9 +18,9 @@ class LinkedList {
         let node = new Node(value);
 
         if (this.length === 0) {
-            this.head = node;
+            this.data = node;
         } else {
-            let current = this.head;
+            let current = this.data;
 
             while(current.next) {
                 current = current.next;
@@ -36,10 +37,10 @@ class LinkedList {
             return 'Incorrect value of position';
         }
 
-        let current = this.head;
+        let current = this.data;
 
         if (position === 0) {
-            this.head = current.next;
+            this.data = current.next;
         } else {
             let prev = null;
             let index = 0;
@@ -50,7 +51,7 @@ class LinkedList {
                 index++;
             }
 
-            prev.next = current.next; // За левым элементом будет следовать не current, а следующий элемент за current.
+            prev.next = current.next; 
         }
 
         this.length--;
@@ -58,16 +59,20 @@ class LinkedList {
     }
 
     remove(value) {
-        this.removeFromPosition(this.getIndexOf(value));
-        return -1;
+        if(this.contains(value)){
+            this.removeFromPosition(this.getIndexOf(value));
+            return true;
+        }
+        return false;
+       
     }
 
    clear() {
-        this.head = null;
+        this.data = null;
    }
 
     getIndexOf(value) {
-        let current = this.head;
+        let current = this.data;
         let index = 0;
 
         while(current) {
@@ -92,15 +97,23 @@ class LinkedList {
     }
 
     log() {
-        let current = this.head,
+        let current = this.data,
         arr = [],
         i = 0;
         while(current) {
-            arr[i] =  current.value;
+            arr[i++] =  current.value;
             current = current.next;
         }
         console.log(arr.join(', '));
     }
+
+    [Symbol.iterator]= function*() {
+        let current = this.data;
+        while (current) {
+          yield current.value;
+          current = current.next;
+        }
+    };
 }
 
 
@@ -120,16 +133,15 @@ while(ll.remove(100));
 ll.log();
 // "1, 2, 3, 4, 5"
 ll.add(10);
-
 ll.log();
 // "1, 2, 3, 4, 5, 10"
 console.log(ll.contains(10));
-// "true"
+// // "true"
 let sum = 0;
 for(const n of ll) 
 {sum += n;}
 console.log(sum);
-// "25"
+// // "25"
 ll.clear();
 ll.log();
-// ""
+// // ""
